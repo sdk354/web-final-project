@@ -1,4 +1,22 @@
 <?php
+if (basename(__FILE__) === basename($_SERVER['SCRIPT_FILENAME'])) {
+    // Accessed directly, apply your redirect logic
+    session_start();
+    $is_student = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+    $is_admin = isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true;
+
+    if ($is_admin) {
+        header("Location: ../admin_page.php");
+        exit;
+    } elseif ($is_student) {
+        header("Location: ../user_page.php");
+        exit;
+    } else {
+        header("Location: ../login.php");
+        exit;
+    }
+}
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

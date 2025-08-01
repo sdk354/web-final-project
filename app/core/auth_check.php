@@ -21,10 +21,7 @@ function get_redirect_url($target_page) {
     $view_pages = ['home_page.php', 'user_page.php', 'admin_page.php'];
     $target_dir = in_array($target_page, $view_pages) ? 'views' : 'auth';
 
-    if ($current_dir === 'views' && $target_dir === 'auth') {
-        return "../auth/{$target_page}";
-    }
-    if ($current_dir === 'auth' && $target_dir === 'views') {
+    if ($current_dir === 'views') {
         return "../views/{$target_page}";
     }
     return $target_page;
