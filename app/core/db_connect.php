@@ -1,9 +1,9 @@
 <?php
-//echo "DEBUG: db_connect.php was loaded<br>";
+//die("DEBUG: db_connect.php was successfully included!");
 
 $servername = "127.0.0.1";
 $username = "root";
-$password = "";
+$password = "abcd1234";
 $dbname = "booking_management";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
