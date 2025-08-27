@@ -1,6 +1,15 @@
 <?php
 require_once '../core/auth_check.php';
-require_once '../core/db_connect.php';
+require_once '../core/database/db_connect.php';;
+
+if (isset($_GET['redirect'], $_GET['facility'])
+        && $_GET['redirect'] === 'booking'
+) {
+    // stash in session so we can read it on the user page
+    $_SESSION['pendingBookingFacility'] = (int)$_GET['facility'];
+    header('Location: ../views/user_page.php?modal=1');
+    exit;
+}
 
 $email_error = '';
 $password_error = '';
@@ -33,7 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
 
-            header("Location: ../views/user_page.php");
+            // if we came here to book, send straight to modal
+            if (isset($_SESSION['pendingBookingFacility'])) {
+                header("Location: ../views/user_page.php?modal=1");
+            } else {
+                header("Location: ../views/user_page.php");
+            }
             exit;
         } else {
             $password_error = "Invalid password";

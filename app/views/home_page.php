@@ -9,6 +9,10 @@ if (isset($_GET['logout'])) {
 }
 
 $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+
+$is_student = isset($_SESSION['loggedin'])
+        && $_SESSION['loggedin'] === true
+        && ($_SESSION['role'] ?? '') === 'user';
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +54,6 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
     </div>
 </section>
 
-
-
-
 <!-- Main Content Area -->
 <main class="flex-1 p-6"> <!-- Removed bg-gray-100 here to let body gradient show -->
     <!-- Tabs for Study Halls / Sports Facilities -->
@@ -81,7 +82,7 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                     <h4 class="text-xl font-bold text-green-800 mb-2">Study Hall A</h4>
                     <p class="text-green-700 text-sm mb-2"><i class="fas fa-users mr-2"></i>Capacity: 30 students</p>
                     <p class="text-green-600 text-sm mb-4"><i class="fas fa-check-circle mr-2"></i>Available Now</p>
-                    <button class="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md">
+                    <button class="book-now-homepage-btn bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md" data-facility-id="1">
                         Book Now
                     </button>
                 </div>
@@ -92,20 +93,20 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                     <h4 class="text-xl font-bold text-green-800 mb-2">Study Hall B</h4>
                     <p class="text-green-700 text-sm mb-2"><i class="fas fa-users mr-2"></i>Capacity: 20 students</p>
                     <p class="text-green-600 text-sm mb-4"><i class="fas fa-check-circle mr-2"></i>Available Now</p>
-                    <button class="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md">
+                    <button class="book-now-homepage-btn bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md" data-facility-id="2">
                         Book Now
                     </button>
                 </div>
 
                 <!-- Group Study Room Card -->
-                <div class="bg-red-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center border border-red-200">
-                    <i class="fas fa-home text-red-600 text-5xl mb-4"></i>
-                    <h4 class="text-xl font-bold text-red-800 mb-2">Group Study Room</h4>
-                    <p class="text-red-700 text-sm mb-2"><i class="fas fa-users mr-2"></i>Capacity: 10 students</p>
-                    <p class="text-red-600 text-sm mb-4"><i class="fas fa-times-circle mr-2"></i>Booked until 3:00 PM
+                <div class="bg-green-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center border border-green-200">
+                    <i class="fas fa-home text-green-600 text-5xl mb-4"></i>
+                    <h4 class="text-xl font-bold text-green-800 mb-2">Group Study Room</h4>
+                    <p class="text-green-700 text-sm mb-2"><i class="fas fa-users mr-2"></i>Capacity: 10 students</p>
+                    <p class="text-green-600 text-sm mb-4"><i class="fas fa-times-circle mr-2"></i>Booked until 3:00 PM
                     </p>
-                    <button class="bg-gray-400 text-white py-2 px-6 rounded-lg cursor-not-allowed shadow-md" disabled>
-                        Currently Unavailable
+                    <button class="book-now-homepage-btn bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md" data-facility-id="3">
+                        Book Now
                     </button>
                 </div>
             </div>
@@ -126,7 +127,7 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                     <h4 class="text-xl font-bold text-blue-800 mb-2">Badminton Court</h4>
                     <p class="text-blue-700 text-sm mb-2"><i class="fas fa-clock mr-2"></i>Open: 8:00 AM - 8:00 PM</p>
                     <p class="text-blue-600 text-sm mb-4"><i class="fas fa-check-circle mr-2"></i>2 Courts Available</p>
-                    <button class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md">
+                    <button class="book-now-homepage-btn bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md" data-facility-id="4">
                         Book Now
                     </button>
                 </div>
@@ -137,7 +138,7 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                     <h4 class="text-xl font-bold text-blue-800 mb-2">Swimming Pool</h4>
                     <p class="text-blue-700 text-sm mb-2"><i class="fas fa-clock mr-2"></i>Open: 6:00 AM - 9:00 PM</p>
                     <p class="text-blue-600 text-sm mb-4"><i class="fas fa-check-circle mr-2"></i>Available Now</p>
-                    <button class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md">
+                    <button class="book-now-homepage-btn bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md" data-facility-id="5">
                         Book Now
                     </button>
                 </div>
@@ -148,7 +149,7 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                     <h4 class="text-xl font-bold text-blue-800 mb-2">Gym</h4>
                     <p class="text-blue-700 text-sm mb-2"><i class="fas fa-clock mr-2"></i>Open: 9:00 AM - 10:00 PM</p>
                     <p class="text-blue-600 text-sm mb-4"><i class="fas fa-check-circle mr-2"></i>Available Now</p>
-                    <button class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md">
+                    <button class="book-now-homepage-btn bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md" data-facility-id="6">
                         Book Now
                     </button>
                 </div>
@@ -158,9 +159,9 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                     <i class="fas fa-table-tennis text-blue-600 text-5xl mb-4"></i>
                     <h4 class="text-xl font-bold text-blue-800 mb-2">Table Tennis</h4>
                     <p class="text-blue-700 text-sm mb-2"><i class="fas fa-clock mr-2"></i>Open: 9:00 AM - 8:00 PM</p>
-                    <p class="text-red-600 text-sm mb-4"><i class="fas fa-times-circle mr-2"></i>Fully Booked Today</p>
-                    <button class="bg-gray-400 text-white py-2 px-6 rounded-lg cursor-not-allowed shadow-md" disabled>
-                        Currently Unavailable
+                    <p class="text-blue-600 text-sm mb-4"><i class="fas fa-check-circle mr-2"></i>Available Now</p>
+                    <button class="book-now-homepage-btn bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md" data-facility-id="7">
+                        Book Now
                     </button>
                 </div>
             </div>
@@ -206,10 +207,18 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
         </div>
     </div>
     <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-xs">
-        &copy; 2023 NSBM Management Portal. All rights reserved.
+        &copy; 2025 NSBM Management Portal. All rights reserved.
     </div>
 </footer>
 
+
+<script>
+	window.NSBM = {
+		isStudent: <?= json_encode($is_student) ?>,
+		loginUrl: 'login_user.php',
+		userPage: 'user_page.php'
+	};
+</script>
 <script src="../../public/js/index.js"></script>
 </body>
 </html>
