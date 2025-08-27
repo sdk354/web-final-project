@@ -1,0 +1,2 @@
+# Force correct MIME type for JS
+AddType application/javascript .js

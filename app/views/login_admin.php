@@ -1,6 +1,6 @@
 <?php
 require_once '../core/auth_check.php';
-require_once '../core/db_connect.php';
+require_once '../core/database/db_connect.php';;
 
 $email_error = '';
 $password_error = '';
