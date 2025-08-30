@@ -152,7 +152,6 @@ while ($r = $res->fetch_assoc()) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="flex h-screen overflow-hidden">
-<?php require_once 'partials/sidebar.php'; ?>
 <div class="flex-1 flex flex-col overflow-hidden">
     <?php require_once 'partials/header.php'; ?>
     <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
