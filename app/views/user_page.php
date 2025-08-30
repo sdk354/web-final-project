@@ -221,7 +221,6 @@ $next_time = isset($nextRow['start_time'])
     <link rel="stylesheet" href="../../public/css/index.css">
 </head>
 <body class="flex h-screen overflow-hidden">
-<?php require_once 'partials/sidebar.php'; ?>
 <div class="flex-1 flex flex-col overflow-hidden">
     <?php require_once 'partials/header.php'; ?>
     <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
